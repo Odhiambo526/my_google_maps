@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Google Map</title>
+</head>
+<body>
+    <h1>My Google Map</h1>
+   <div id="map"></div>
+   <script>
+
+       function initMap(){
+         var options = {
+             zoom:13,
+             center:{lat:-0.303099,lng:36.080025}
+         }
+
+         var map = new google.maps.Map(document.getElementById('map'), options);
+
+
+         google.maps.event.addListener(map, 'click', 
+         function(event){
+             addMaker({coords:event.latlng});
+         });
+/*
+         // Add Maker
+
+         var marker = new google.maps.Maker({
+             position:{lat:0.0917,lng:-34.7680},
+             map:map,
+             icon:''
+         });
+
+         var infoWindow = new google.maps.InfoWindow({
+             content:'<h1>Kisumu</h1>'
+         });
+
+         marker.addListener('click', function() {
+             infoWindow.open(map, marker);
+         });
+         */
+
+          // Array of marker
+
+          var markers = [
+              {
+          coords:{lat:-0.303099,lng:36.080025},
+            iconImage:'',
+            content:'<h1>Kisumu</h1>'
+        },
+        {
+            coords:{lat:0.0626,lng:-34.2878},
+        content:'<h1>Kisumu</h1>'
+        },
+        {
+            coords:{lat:0.5695,lng:-34.5584}
+        }
+          ];
+
+
+          for(var i = 0; i < markers.length; i++) {
+
+              addMaker(markers[i])
+          }
+            addMaker({
+            coords:{lat:-0.303099,lng:36.080025},
+            iconImage:'',
+            content:'<h1>Kisumu</h1>'
+        });
+        addMaker({
+            coords:{lat:-0.303099,lng:36.080025},
+            iconImage:'',
+            content:'<h1>Kisumu</h1>'
+        });
+        content:'<h1>Kisumu</h1>',
+        addMaker({
+            coords:{lat:0.0626,lng:-34.2878},
+        content:'<h1>Kisumu</h1>'
+        });
+        addMaker({coords:{lat:0.5695,lng:-34.5584}});
+
+
+// Add Maker Function
+
+function addMaker(props){
+    var marker = new google.maps.Maker({
+             position:props.coords,
+             map:map,
+             //icon:props.iconImage
+         });
+
+
+        if(props.iconImage) {
+            marker.setIcon(props.iconImage);
+        }
+
+       if(props.content) {
+        var infoWindow = new google.maps.InfoWindow({
+             content:props.content
+         });
+
+         marker.addListener('click', function() {
+             infoWindow.open(map, marker);
+         });
+       }
+
+
+     } 
+       }
+   </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7815EBuk2WSAIofuR8_pTRNFk_7o43OM&callback=initMap">
+</script>
+</body>
+</html>
